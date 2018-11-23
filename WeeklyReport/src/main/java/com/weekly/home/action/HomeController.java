@@ -1,4 +1,6 @@
 package com.weekly.home.action;
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +16,8 @@ import com.weekly.home.repository.HomeRepository;
 public class HomeController {
 	@Autowired
 	HomeRepository homeRepository;
-	
+	@Autowired
+	ServletContext servletContext;
 	@Autowired
 	ExcelReader excelReader;
 	@RequestMapping("/home")
@@ -25,6 +28,8 @@ public class HomeController {
 	@RequestMapping(value = "/getSRdata", method = RequestMethod.POST)
 	@ResponseBody
 	public JSONArray getSRdata(@RequestBody JSONObject data){
-		return excelReader.getexcel( "C://Users/tl477/Desktop/Manday Detail.xlsx");
+		 //String path = servletContext.getRealPath();
+		// System.out.println("classpath:static/files/Manday Detail.xlsx");
+		return excelReader.getexcel("src/main/resources/static/files/Manday Detail.xlsx");
 	}
 }
